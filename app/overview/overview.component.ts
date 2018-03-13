@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthData } from '../classes/auth_data';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-overview',
@@ -8,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+    auth: AuthData = {
+        login:"", 
+        password: ""
+    };
+    pass_shadow: string = "";
+    
+    constructor(private api: ApiService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {}
 
+    login(): void {
+        console.log(this.auth);
+    }
+    
+    register(): void {
+        console.log(this.auth);
+    }
 }

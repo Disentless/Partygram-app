@@ -1,4 +1,79 @@
-<p>
-  overview works!
-</p>
-<button mat-button routerLink="/login">Login</button>
+<div fxFill fxLayout="row">
+    <div fxFlex="60" fxFlex.xs="0"></div>
+    <div fxFlex="auto">
+        <mat-card fxFill>
+            <mat-card-content>
+                <mat-tab-group>
+                    <mat-tab label="Login">
+                        <div>
+                            <form fxFill fxLayout="column">
+                                <mat-form-field>
+                                    <input matInput 
+                                           type="text" 
+                                           placeholder="Login" 
+                                           name="login"
+                                           autocomplete="username"
+                                           [(ngModel)]="auth.login">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput 
+                                           type="password" 
+                                           placeholder="Password"
+                                           name="password"
+                                           autocomplete="current-password"
+                                           [(ngModel)]="auth.password">
+                                </mat-form-field>
+                            </form>
+                            <div fxFill>
+                                <div fxFlex="auto"></div>
+                                <button mat-raised-button color="primary" (click)="login()">Login</button>
+                                <div fxFlex="auto"></div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Register">
+                        <div>
+                            <form fxFill fxLayout="column">
+                                <mat-form-field>
+                                    <input matInput
+                                           type="text"
+                                           placeholder="Login"
+                                           name="Login"
+                                           maxLength="30"
+                                           autocomplete="username"
+                                           [(ngModel)]="auth.login">
+                                    <mat-hint align="end">{{ auth.login.length }} / 30</mat-hint>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput
+                                           type="password"
+                                           placeholder="Password"
+                                           name="password"
+                                           maxLength="60"
+                                           autocomplete="new-password"
+                                           [(ngModel)]="auth.password">
+                                    <mat-hint align="end">{{ auth.password.length }} / 60</mat-hint>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput
+                                           type="password"
+                                           placeholder="Repeat password"
+                                           name="password_shadow"
+                                           autocomplete="new-password"
+                                           [(ngModel)]="pass_shadow">
+                                </mat-form-field>
+                            </form>
+                            <div fxFill>
+                                <div fxFlex="auto"></div>
+                                <button mat-raised-button 
+                                        color="primary"
+                                        (click)="register()">Register</button>
+                                <div fxFlex="auto"></div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
