@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body {
+    padding-top: 60px;
+    overflow-y: hidden;
+}
+
+.content-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content {
+    margin: 10px;
+}
+
+.content > * {
+    width: 100%;
+}
+
+router-outlet {
+    width: 0px !important;
+}
+
+@media screen and (min-width: 576px) { 
+    .content-wrapper {
+        width: 540px;
+    }
+}
+@media screen and (min-width: 768px) { 
+    .content-wrapper {
+        width: 720px;
+    }
+}
+@media screen and (min-width: 992px) {  
+    .content-wrapper {
+        width: 960px;
+    }
+}
+@media screen and (min-width: 1200px) { 
+    .content-wrapper {
+        width: 1140px;
+    }
+}
