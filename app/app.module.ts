@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 // Angular Material
 import { MatButtonModule } from '@angular/material';
@@ -56,7 +57,7 @@ import { AddEventComponent } from './add-event/add-event.component';
         MatTabsModule,
         BrowserAnimationsModule
     ],
-    providers: [ApiService],
+    providers: [ApiService, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

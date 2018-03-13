@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthData } from '../classes/auth_data';
 import { ApiService } from '../api.service';
+import { LoginData, RegisterData } from '../classes/api';
 
 @Component({
   selector: 'app-overview',
@@ -10,10 +11,14 @@ import { ApiService } from '../api.service';
 
 export class OverviewComponent implements OnInit {
 
-    auth: AuthData = {
-        login:"", 
+    loginData: LoginData = {
+        username:"", 
         password: ""
     };
+    registerData: RegisterData = {
+        username: "",
+        password: ""
+    }
     pass_shadow: string = "";
     
     constructor(private api: ApiService) { }
@@ -21,10 +26,10 @@ export class OverviewComponent implements OnInit {
     ngOnInit() {}
 
     login(): void {
-        console.log(this.auth);
+        
     }
     
     register(): void {
-        console.log(this.auth);
+        
     }
 }

@@ -13,7 +13,7 @@
                                            placeholder="Login" 
                                            name="login"
                                            autocomplete="username"
-                                           [(ngModel)]="auth.login">
+                                           [(ngModel)]="loginData.username">
                                 </mat-form-field>
                                 <mat-form-field>
                                     <input matInput 
@@ -21,7 +21,7 @@
                                            placeholder="Password"
                                            name="password"
                                            autocomplete="current-password"
-                                           [(ngModel)]="auth.password">
+                                           [(ngModel)]="loginData.password">
                                 </mat-form-field>
                             </form>
                             <div fxFill>
@@ -41,8 +41,8 @@
                                            name="Login"
                                            maxLength="30"
                                            autocomplete="username"
-                                           [(ngModel)]="auth.login">
-                                    <mat-hint align="end">{{ auth.login.length }} / 30</mat-hint>
+                                           [(ngModel)]="registerData.username">
+                                    <mat-hint align="end">{{ registerData.username.length }} / 30</mat-hint>
                                 </mat-form-field>
                                 <mat-form-field>
                                     <input matInput
@@ -51,8 +51,8 @@
                                            name="password"
                                            maxLength="60"
                                            autocomplete="new-password"
-                                           [(ngModel)]="auth.password">
-                                    <mat-hint align="end">{{ auth.password.length }} / 60</mat-hint>
+                                           [(ngModel)]="registerData.password">
+                                    <mat-hint align="end">{{ registerData.password.length }} / 60</mat-hint>
                                 </mat-form-field>
                                 <mat-form-field>
                                     <input matInput

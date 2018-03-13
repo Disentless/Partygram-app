@@ -3,32 +3,21 @@ import { Event } from './classes/event';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+
+// API Classes
+import { EventList } from './classes/api';
 
 @Injectable()
 export class ApiService {
-    private apiURL = 'https://';
+    private serverURL:string = "https://partygram.com/api/";
     
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private cookie: CookieService) {
+        
+    }
     
-    getEvents(c: number): Observable<Event[]> {
-        let i:number = 0;
-        let result: Event[] = [];
-        
-        for(i = 0; i < c; ++i) {
-            result.push({
-                id: i,
-                creator_id: 0,
-                name: 'Event ' + i,
-                location: 'Location 1',
-                description: 'Description of event ' + i,
-                tags: [],
-                type: 'Type of event ' + i,
-                datetime: 'dd/mm/yyyy hh:mm',
-                member_count: 0
-            });
-        }
-        
-        return of(result);
+    getEvents(count: number, offset: number) {
+        return this.http.get<EventList>(this.serverURL+"events/?offset="+offset+"&size="+count);
     }
     
     getEvent(id: number): Observable<Event> {
@@ -43,5 +32,9 @@ export class ApiService {
             datetime: 'dd/mm/yyyy hh:mm',
             member_count: 0
         });
+    }
+    
+    isOnline(): boolean {
+        return this.cookie.check('user_id');
     }
 }

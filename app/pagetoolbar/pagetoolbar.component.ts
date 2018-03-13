@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'page-toolbar',
@@ -11,9 +12,13 @@ export class PagetoolbarComponent implements OnInit {
         name: 'Partygram App'
     };
     
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
   }
 
+    
+    userOnline(): boolean {
+        return this.api.isOnline();
+    }
 }

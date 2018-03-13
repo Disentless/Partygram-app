@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Event } from '../classes/event';
+import { EventInfo, EventList } from '../classes/api';
 
 @Component({
   selector: 'app-listview',
@@ -9,13 +9,13 @@ import { Event } from '../classes/event';
 })
 export class ListviewComponent implements OnInit {
 
-    events: Event[];
+    events: EventInfo[];
     
     constructor(private apiService: ApiService) { }
     
     getEvents(): void {
-        this.apiService.getEvents(10)
-            .subscribe(events => this.events = events);
+        this.apiService.getEvents(10,0)
+            .subscribe(rq => this.events = rq.events);
     }
     
     ngOnInit() {
