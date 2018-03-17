@@ -1,40 +1,73 @@
 import { Injectable } from '@angular/core';
-import { Event } from './classes/event';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 // API Classes
-import { EventList } from './classes/api';
+import { EventList, ModifyEventInfo, BlockRequest, TagList, TypeList, LoginData, RegisterData, SocialTokenRequest, SocialTokenResponse } from './classes/api';
 
 @Injectable()
 export class ApiService {
     private serverURL:string = "https://partygram.com/api/";
     
-    constructor(private http: HttpClient, private cookie: CookieService) {
-        
+    constructor(private http: HttpClient, private cookie: CookieService) {}
+    
+    buildBlockURL(br: BlockRequest) {
+        return "offset="+br.offset+"&size="+br.size;
     }
     
-    getEvents(count: number, offset: number) {
-        return this.http.get<EventList>(this.serverURL+"events/?offset="+offset+"&size="+count);
+    getEvents(c: number, o: number) {
+        let url = this.serverURL+"events/?"+this.buildBlockURL({offset: o, size: c});
+        return this.http.get<EventList>(url);
     }
     
-    getEvent(id: number): Observable<Event> {
-        return of({
-            id: id,
-            creator_id: 0,
-            name: 'Event ' + id,
-            location: 'Location 1',
-            description: 'Description of event ' + id,
-            tags: [],
-            type: 'Type of event ' + id,
-            datetime: 'dd/mm/yyyy hh:mm',
-            member_count: 0
-        });
+    addEvent(data: ModifyEventInfo) {
+        let url = this.serverURL+"events/";
+        return this.http.post(url, data);
+    }
+    
+    joinEvent(id: number) {
+        let url = this.serverURL+"events/"+id;
+        return this.http.patch(url, null);
+    }
+    
+    deleteEvent(id:number) {
+        let url = this.serverURL+"events/"+id;
+        return this.http.delete(url, null);
+    }
+    
+    getTags(c: number, o: number) {
+        let url = this.serverURL+"tags/?"+this.buildBlockURL({offset: o, size: c});
+        return this.http.get<TagList>(url);
+    }
+    
+    getTypes(c: number, o: number) {
+        let url = this.serverURL+"types/?"+this.buildBlockURL({offset: o, size: c});
+        return this.http.get<TypeList>(url);
+    }
+    
+    login(ld: LoginData) {
+        let url = this.serverURL+"login";
+        return this.http.post(url, ld);
+    }
+    
+    register(rd: RegisterData) {
+        let url = this.serverURL+"register";
+        return this.http.post(url, rd);
+    }
+    
+    logout() {
+        let url = this.serverURL+"logout";
+        return this.http.post(url, null);
+    }
+    
+    getToken(tr: SocialTokenRequest) {
+        let url = this.serverURL+"social/token_user";
+        return this.http.post<SocialTokenResponse>(url, tr);
     }
     
     isOnline(): boolean {
-        return this.cookie.check('user_id');
+        return this.cookie.check('user_data');
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../classes/event';
-import { Tag } from '../classes/tag';
+import { EventInfo, Tag } from '../classes/api';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-add-event',
@@ -9,42 +9,39 @@ import { Tag } from '../classes/tag';
 })
 export class AddEventComponent implements OnInit {
     
-    event: Event = {
-        id: -1,
-        creator_id: 0,          // Get current user ID
-        name: undefined,        
-        location: undefined,
-        description: undefined,
-        tags: [],               // Fill with tags' IDs
-        type: undefined,        
-        datetime: undefined,    // Decide on format
-        member_count: 0
-    };
-    taglist: Tag[] = [
-        {id: 0, name: "tag 1"}, 
-        {id: 1, name: "tag 2"},
-        {id: 2, name: "tag 3"}
-    ];
+    event: EventInfo;
+    taglist: Tag[];
     tag: "";
     
-    constructor() { }
+    constructor(private storage: StorageService) { }
 
     ngOnInit() {
-        
+        this.taglist = this.storage.getTags();
     }
     
-    onKeyUp(event: any): void {
+    tag_onKeyUp(event: any): void {
         if (event.keyCode != 13) return;
-        // Find tag with this name before adding
-        // ...
-        var i = 0;
-        for(i=0; i<this.event.tags.length; ++i){
-            if (this.event.tags[i].name == this.tag) {
+        // Find tag and its ID
+        let tag_id = -1;
+        for(let i=0;i<this.taglist.length;++i){
+            if (this.taglist[i].conditionName == this.tag) {
+                tag_id = this.taglist[i].id;
+                break;
+            }
+        }
+        if (tag_id == -1) {
+            // Tag wasn't found
+            this.tag = "";
+            return;
+        }
+        // Looking for repeating
+        for(let i=0; i<this.event.tags.length; ++i){
+            if (this.event.tags[i] == tag_id) {
                 this.tag = "";
                 return;
             }
         }
-        this.event.tags.push({id: 0, name: this.tag});
+        this.event.tags.push(tag_id);
         this.tag = "";
     }
 }

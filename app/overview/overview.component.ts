@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthData } from '../classes/auth_data';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { LoginData, RegisterData } from '../classes/api';
 
@@ -21,15 +21,27 @@ export class OverviewComponent implements OnInit {
     }
     pass_shadow: string = "";
     
-    constructor(private api: ApiService) { }
+    constructor(private api: ApiService, private router: Router) { }
 
     ngOnInit() {}
 
     login(): void {
-        
+        this.api.login(this.loginData)
+        .subscribe(data => {
+            console.log("Login success");
+            this.router.navigate(['list']);
+        }, error => {
+            console.log("Login error");
+        });
     }
     
     register(): void {
-        
+        this.api.register(this.registerData)
+        .subscribe(data => {
+            console.log("Register success");
+            this.router.navigate(['list']);
+        }, error => {
+            console.log("Register error");
+        });
     }
 }

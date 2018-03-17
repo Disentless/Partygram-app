@@ -21,7 +21,7 @@
                 <input matInput placeholder="Add tag" 
                        name="tag" 
                        [(ngModel)]="tag" 
-                       (keyup)="onKeyUp($event)"
+                       (keyup)="tag_onKeyUp($event)"
                        [matAutocomplete]="taglist">
                 <mat-autocomplete #taglist="matAutocomplete">
                     <mat-option *ngFor="let tag of taglist" [value]="tag.id">
@@ -29,7 +29,6 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            
             <mat-chip-list>
                 <mat-chip *ngFor="let tag of event.tags">{{ tag.name }}</mat-chip>
             </mat-chip-list>

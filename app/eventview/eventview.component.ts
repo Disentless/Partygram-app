@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../classes/event';
+import { EventInfo } from '../classes/api';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ApiService } from '../api.service';
+import { StorageService } from '../storage.service';
 
 @Component({
     selector: 'app-eventview',
@@ -10,16 +11,16 @@ import { ApiService } from '../api.service';
     styleUrls: ['./eventview.component.scss']
 })
 export class EventviewComponent implements OnInit {
-    event: Event;
+    event: EventInfo;
     constructor(
         private route: ActivatedRoute,
         private location: Location,
-        private apiService: ApiService
+        private apiService: ApiService,
+        private storage: StorageService
     ) {}
 
     ngOnInit() {
         const id = +this.route.snapshot.paramMap.get('id');
-        this.apiService.getEvent(id)
-            .subscribe(event => this.event = event);
+        this.event = this.storage.getEvent(id);
     }
 }

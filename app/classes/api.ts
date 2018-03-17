@@ -8,9 +8,15 @@ export class LoginData {
     password: string;
 }
 
-export class AccessTokenRequest {
+export class SocialTokenRequest {
     provider: string;
     code: string;
+}
+
+export class SocialTokenResponse {
+    username: string;
+    email: string;
+    token: string;
 }
 
 // Types
@@ -71,9 +77,15 @@ export interface EventInfo {
     cost: number;
     eventMaster: number;
     eventMembers: number[];
-    conditions: number[]
+    tags: number[];
 }
 
 export interface EventList {
     events: EventInfo[];
+}
+
+// Other
+export class BlockRequest {
+    offset: number;
+    size: number;
 }
