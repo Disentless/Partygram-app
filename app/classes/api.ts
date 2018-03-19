@@ -34,17 +34,17 @@ export interface TypeList {
 }
 
 // Tags
-export class TagsRequest {
+export class ConditionRequest {
     offset: number;
     size: number;
 }
-export interface Tag {
+export interface Condition {
     id: number;
     conditionName: string;
 }
-export interface TagList {
+export interface ConditionList {
     success: boolean;
-    tags: Tag[];
+    tags: Condition[];
 }
 
 // Events
@@ -75,8 +75,7 @@ export interface EventInfo {
     withConfirmation: boolean;
     private: boolean;
     cost: number;
-    eventMaster: number;
-    eventMembers: number[];
+    type: number;
     tags: number[];
 }
 

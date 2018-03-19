@@ -6,7 +6,7 @@ import { EventviewComponent } from './eventview/eventview.component';
 import { AddEventComponent } from './add-event/add-event.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/overview', pathMatch: 'full'},
+    { path: '', redirectTo: '/add_event', pathMatch: 'full'},
     { path: 'overview', component: OverviewComponent },
     { path: 'list', component: ListviewComponent },
     { path: 'event/:id', component: EventviewComponent },

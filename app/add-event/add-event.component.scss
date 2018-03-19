@@ -1,3 +1,7 @@
 mat-card-actions {
     text-align: center;
 }
+
+mat-chip mat-icon:hover {
+    cursor: pointer;
+}

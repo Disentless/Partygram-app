@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EventInfo, Type, Tag  } from './classes/api';
+import { EventInfo, Type, Condition  } from './classes/api';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class StorageService {
     
     events: EventInfo[] = [];
     types: Type[] = [];
-    tags: Tag[] = [];
+    conditions: Condition[] = [];
     constructor() {}    
     
     getEvent(id: number): EventInfo {
@@ -21,8 +21,8 @@ export class StorageService {
         return this.types;
     }
     
-    getTags(): Tag[] {
-        return this.tags;
+    getConditions(): Condition[] {
+        return this.conditions;
     }
     
     getType(id: number): Type {
@@ -31,9 +31,9 @@ export class StorageService {
         }
     }
     
-    getTag(id: number): Tag {
-        for(let i=0;i<this.tags.length;++i){
-            if (this.tags[i].id == id) return this.tags[i];
+    getCondition(id: number): Condition {
+        for(let i=0;i<this.conditions.length;++i){
+            if (this.conditions[i].id == id) return this.conditions[i];
         }
     }
 }

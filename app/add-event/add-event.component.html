@@ -7,35 +7,53 @@
         <mat-card-subtitle>Public event</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form id="new-event-form" fxLayout="column" fxFill>
+        <div fxFlex="auto"></div>
+        <form id="new-event-form" fxLayout="column" fxFlex="80">
             <mat-form-field>
-                <input matInput placeholder="Name">
+                <input matInput placeholder="Name" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Location">
+                <input matInput placeholder="Location" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Description">
+                <input matInput placeholder="Description" required>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+            <div fxLayout="row">
+                <h4>Условия: </h4>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let c of event.tags">
+                        {{ storage.getCondition(c).conditionName }}
+                        <mat-icon (click)="deleteCondition(c)">remove_circle</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+                <div *ngIf="conditions.length > 0">
+                    <button mat-mini-fab color="primary" (click)="conditionSelect=true" *ngIf="!conditionSelect">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <mat-form-field *ngIf="conditionSelect">
+                        <mat-select placeholder="Condition" [(ngModel)]="condition_id" (change)="addCondition($event)" name="condition_id">
+                            <mat-option *ngFor="let c of conditions" [value]="c.id">{{ storage.getCondition(c.id).conditionName }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-form-field>
+                <mat-select placeholder="Type" (ngModel)="event.type" name="type_id">
+                    <mat-option *ngFor="let t of types" [value]="t.id">{{ t.typeName }}</mat-option>
+                </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Add tag" 
-                       name="tag" 
-                       [(ngModel)]="tag" 
-                       (keyup)="tag_onKeyUp($event)"
-                       [matAutocomplete]="taglist">
-                <mat-autocomplete #taglist="matAutocomplete">
-                    <mat-option *ngFor="let tag of taglist" [value]="tag.id">
-                        {{ tag.name }}
-                    </mat-option>
-                </mat-autocomplete>
+                <input matInput [matDatepicker]="datePicker" placeholder="Дата">
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
             </mat-form-field>
-            <mat-chip-list>
-                <mat-chip *ngFor="let tag of event.tags">{{ tag.name }}</mat-chip>
-            </mat-chip-list>
         </form>
+        <div fxFlex="auto"></div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-raised-button color="primary">Confirm</button>
+        <button mat-raised-button color="primary" (click)="confirm()">Confirm</button>
         <button mat-raised-button>Cancel</button>
     </mat-card-actions>
 </mat-card>

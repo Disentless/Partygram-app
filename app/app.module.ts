@@ -12,8 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -24,6 +27,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { OverviewComponent } from './overview/overview.component';
 import { ApiService } from './api.service';
+import { StorageService } from './storage.service';
 import { PagetoolbarComponent } from './pagetoolbar/pagetoolbar.component';
 import { ListviewComponent } from './listview/listview.component';
 import { EventviewComponent } from './eventview/eventview.component';
@@ -55,9 +59,12 @@ import { AddEventComponent } from './add-event/add-event.component';
         MatDividerModule,
         MatAutocompleteModule,
         MatTabsModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         BrowserAnimationsModule
     ],
-    providers: [ApiService, CookieService],
+    providers: [ApiService, CookieService, StorageService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

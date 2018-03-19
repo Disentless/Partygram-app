@@ -5,11 +5,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 // API Classes
-import { EventList, ModifyEventInfo, BlockRequest, TagList, TypeList, LoginData, RegisterData, SocialTokenRequest, SocialTokenResponse } from './classes/api';
+import { EventList, ModifyEventInfo, BlockRequest, ConditionList, TypeList, LoginData, RegisterData, SocialTokenRequest, SocialTokenResponse } from './classes/api';
 
 @Injectable()
 export class ApiService {
-    private serverURL:string = "https://partygram.com/api/";
+    private serverURL:string = "https://partygram.pythonanywhere.com/api/";
     
     constructor(private http: HttpClient, private cookie: CookieService) {}
     
@@ -37,9 +37,9 @@ export class ApiService {
         return this.http.delete(url, null);
     }
     
-    getTags(c: number, o: number) {
+    getConditions(c: number, o: number) {
         let url = this.serverURL+"tags/?"+this.buildBlockURL({offset: o, size: c});
-        return this.http.get<TagList>(url);
+        return this.http.get<ConditionList>(url);
     }
     
     getTypes(c: number, o: number) {
@@ -48,22 +48,22 @@ export class ApiService {
     }
     
     login(ld: LoginData) {
-        let url = this.serverURL+"login";
+        let url = this.serverURL+"login/";
         return this.http.post(url, ld);
     }
     
     register(rd: RegisterData) {
-        let url = this.serverURL+"register";
+        let url = this.serverURL+"register/";
         return this.http.post(url, rd);
     }
     
     logout() {
-        let url = this.serverURL+"logout";
+        let url = this.serverURL+"logout/";
         return this.http.post(url, null);
     }
     
     getToken(tr: SocialTokenRequest) {
-        let url = this.serverURL+"social/token_user";
+        let url = this.serverURL+"social/token_user/";
         return this.http.post<SocialTokenResponse>(url, tr);
     }
     
