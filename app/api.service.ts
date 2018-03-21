@@ -9,7 +9,7 @@ import { EventList, ModifyEventInfo, BlockRequest, ConditionList, TypeList, Logi
 
 @Injectable()
 export class ApiService {
-    private serverURL:string = "https://partygram.pythonanywhere.com/api/";
+    private serverURL:string = "https://party11.pythonanywhere.com/api/";
     
     constructor(private http: HttpClient, private cookie: CookieService) {}
     

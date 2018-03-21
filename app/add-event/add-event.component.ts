@@ -27,6 +27,7 @@ export class AddEventComponent implements OnInit {
     types: Type[] = [];
     condition_id: null;
     conditionSelect: false;
+    date: null;
     
     constructor(private storage: StorageService, private api: ApiService) { }
 
